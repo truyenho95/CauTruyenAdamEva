@@ -42,22 +42,24 @@ let isAdamNext = true;
 while (!apple.isEmpty) {
   if (isAdamNext) {
     adam.eat(apple);
-    adam.say('Em ăn một miếng đi không anh ăn hết giờ!');
     adam.setWeight(++adam.weight);
     
     if (!adam.checkApple(apple)) {
       adam.say('Hết cmn táo rồi! Để anh vào rừng kiếm quả khác!');
       apple.isEmpty = true;
+    } else {
+      adam.say('Em ăn một miếng đi không anh ăn hết giờ!');
     }
     isAdamNext = false;
   } else {
     eva.eat(apple);
-    eva.say('Anh ăn một miếng đi nè! Ahihi');
     eva.setWeight(++eva.weight);
     
     if (!eva.checkApple(apple)) {
       eva.say('Hết cmn táo rồi! Anh vào rừng kiếm quả khác về gặm tiếp đi!');
       apple.isEmpty = true;
+    } else {
+      eva.say('Anh ăn một miếng đi nè! Ahihi');
     }
     isAdamNext = true;
   }

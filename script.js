@@ -27,7 +27,7 @@ function Human(name, gender, weight) {
     apple.decrease();
   }
   this.say = function(string) {
-    document.write(`${this.name} say: "${string}" <br>`);
+    document.getElementById('say').innerHTML += (`${this.name} say: "${string}" <br>`);
   }
   this.checkApple = function(apple) {
     return apple.getWeight();
@@ -39,28 +39,30 @@ const eva = new Human('Eva', 'female', 50);
 const apple = new Apple();
 let isAdamNext = true;
 
-while (!apple.isEmpty) {
-  if (isAdamNext) {
-    adam.eat(apple);
-    adam.setWeight(++adam.weight);
-    
-    if (!adam.checkApple(apple)) {
-      adam.say('Hết cmn táo rồi! Để anh vào rừng kiếm quả khác!');
-      apple.isEmpty = true;
+document.getElementById('eatBtn').addEventListener('click', () => {
+  if (!apple.isEmpty) {
+    if (isAdamNext) {
+      adam.eat(apple);
+      adam.setWeight(++adam.weight);
+      
+      if (!adam.checkApple(apple)) {
+        adam.say('Hết cmn táo rồi! Để anh vào rừng kiếm quả khác!');
+        apple.isEmpty = true;
+      } else {
+        adam.say('Em ăn một miếng đi không anh ăn hết giờ!');
+      }
+      isAdamNext = false;
     } else {
-      adam.say('Em ăn một miếng đi không anh ăn hết giờ!');
+      eva.eat(apple);
+      eva.setWeight(++eva.weight);
+      
+      if (!eva.checkApple(apple)) {
+        eva.say('Hết cmn táo rồi! Anh vào rừng kiếm quả khác về gặm tiếp đi!');
+        apple.isEmpty = true;
+      } else {
+        eva.say('Anh ăn một miếng đi nè! Ahihi');
+      }
+      isAdamNext = true;
     }
-    isAdamNext = false;
-  } else {
-    eva.eat(apple);
-    eva.setWeight(++eva.weight);
-    
-    if (!eva.checkApple(apple)) {
-      eva.say('Hết cmn táo rồi! Anh vào rừng kiếm quả khác về gặm tiếp đi!');
-      apple.isEmpty = true;
-    } else {
-      eva.say('Anh ăn một miếng đi nè! Ahihi');
-    }
-    isAdamNext = true;
   }
-}
+})
